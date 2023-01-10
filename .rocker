@@ -1,0 +1,31 @@
+#                                             -*-shell-script-*-
+#
+# Build options
+#
+ROS_DISTRO=rolling
+# - Start from OSRF ROS base image
+ROCKER_BASE_IMAGE=ros:${ROS_DISTRO}-ros-base
+# - Dockerfile snippet
+ROCKER_DOCKERFILE=docker/Dockerfile
+# - Extra `docker build` args
+ROCKER_BUILD_ARGS=(
+    --build-arg=ROS_DISTRO=$ROS_DISTRO
+)
+# - Tag for built image
+ROCKER_IMAGE_TAG=mypkg:${ROS_DISTRO}
+# - Load this directory into docker build context
+ROCKER_LOAD_CONTEXT=true
+
+#
+# Run options
+#
+# - Container name
+ROCKER_NAME=mypkg
+# - Run privileged
+ROCKER_PRIVILEGED=true
+# - Use host networking
+ROCKER_HOST_NETWORKING=true
+# - Extra groups for user
+ROCKER_GROUPS=robots
+# - Clear out extra args
+unset ROCKER_RUN_ARGS
